@@ -8,10 +8,6 @@ userRouter.post("/",postUsers)
 
 userRouter.post("/login",loginUser)
 
-
-
-
-
 export default userRouter;
 
 
