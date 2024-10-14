@@ -128,3 +128,61 @@ Category.findOne({name:name}).then(
     }
 )
 }
+
+
+
+export function updateCategory(req,res)
+{
+if(!isAdminValid(req))
+{
+    res.json({
+        message : "Sign in again"
+    })
+    return
+}
+
+const name = req.params.name;
+
+Category.updateOne({name : name}, req.body).then(
+    ()=>{
+        res.json({
+            message : "Category Updated"
+        })
+    }
+).catch(
+    ()=>{
+        res.json({
+            message : "Category not Created"
+        })
+    }
+)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function isAdminValid(req)
+{
+    if(req.user==null)
+        {
+        return false;
+        }
+    
+    if(req.user.type!="admin")
+        {
+        return true;
+        }
+    return true
+}
