@@ -89,7 +89,7 @@ export function getRoomById(req,res){
         Room.find().then(
             (result)=>{
                 res.json({
-                    category : result
+                    Room : result
                 })
             }
         ).catch(
@@ -100,3 +100,31 @@ export function getRoomById(req,res){
             }
         )
     }
+
+
+export function updateRoom(req,res)
+{
+if(!isAdminValid(req))
+{
+    res.json({
+        message : "Sign in again"
+    })
+    return
+}
+
+const roomId = req.params.roomId;
+
+Room.updateOne({roomId : roomId}, req.body).then(
+    ()=>{
+        res.json({
+            message : "Room Updated"
+        })
+    }
+).catch(
+    ()=>{
+        res.json({
+            message : "Room not Created"
+        })
+    }
+)
+}
