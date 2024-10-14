@@ -50,3 +50,24 @@ export function createBooking(req,res)
         }
     )
 }
+
+export function deleteBooking(req,res)
+{
+    const BookingId = req.params.BookingId
+
+    Booking.findOneAndDelete({
+        BookingId : BookingId
+    }).then(
+        ()=>{
+           res.json({
+            message : "Booking Deleted"
+           })
+        }
+    ).catch(
+        ()=>{
+            res.json({
+                message : "Booking not Deleted"
+            })
+        }
+    )
+}
