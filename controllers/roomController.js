@@ -1,16 +1,16 @@
-import Room from "../models/room";
-import { isAdminValid } from "./userControllers";
+import Room from "../models/room.js";
+import { isAdminValid } from "./userControllers.js";
 
 export function createRoom(req,res)
 {
-    if(!isAdminValid)
+    if(!isAdminValid(req))
     {
         res.status(403).json({
             message : "Sign in Again"
         })
     }
 
-    const newRoom = newRoom(req.body)
+    const newRoom = new Room(req.body)
     newRoom.save().then(
         (result)=>{
             res.json({

@@ -1,12 +1,13 @@
 import express from 'express'
 
-import { createRoom,deleteRoom,getRoom,getRoomById } from '../controllers/roomController'
+import { createRoom,deleteRoom,getRoom,getRoomById,updateRoom } from '../controllers/roomController.js'
 
 const roomRouter = express.Router();
 
 roomRouter.post("/",createRoom);
-roomRouter.delete("/",deleteRoom);
+roomRouter.delete("/:roomId",deleteRoom);
 roomRouter.get("/",getRoom);
-roomRouter.get("/",getRoomById);
+roomRouter.get("/:roomId",getRoomById);
+roomRouter.put("/:roomId",updateRoom);
 
 export default roomRouter;
