@@ -41,6 +41,11 @@ const bookingSchema = new mongoose.Schema({
     notes : {
         type : String,
         default : ""
+    },
+
+    timeStamp : {
+        type : Date,
+        default : Date.now
     }
 })
 
