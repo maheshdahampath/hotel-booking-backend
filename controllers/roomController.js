@@ -85,5 +85,18 @@ export function getRoomById(req,res){
     )
     }
 
-
-    
+    export function getRoom(req,res){
+        Room.find().then(
+            (result)=>{
+                res.json({
+                    category : result
+                })
+            }
+        ).catch(
+            ()=>{
+                res.json({
+                    message : "Room not Found"
+                })
+            }
+        )
+    }
