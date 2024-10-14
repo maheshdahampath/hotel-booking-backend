@@ -1,5 +1,6 @@
 import Booking from "../models/booking.js";
 import { isCustomerValid } from "./userControllers.js";
+import { isAdminValid } from "./userControllers.js";
 
 export function createBooking(req,res)
 {
@@ -17,7 +18,9 @@ export function createBooking(req,res)
 
     Booking.countDocuments({}).then(
        (count)=>{
-       const newId = "INV"+startingId + count + 1;
+        console.log(count)
+       let newId = startingId + count + 1;
+       newId = "INV"+newId
 
        const newBooking = new Booking({
         bookingId : newId,
@@ -70,4 +73,33 @@ export function deleteBooking(req,res)
             })
         }
     )
+}
+
+
+export function updateBooking(req,res)
+{
+if(!isAdminValid(req))
+{
+    res.json({
+        message : "Sign in again"
+    })
+    return
+}
+
+const bookingId = req.params.bookingId;
+
+Booking.updateOne({bookingId : bookingId}, req.body).then(
+    ()=>{
+        res.json({
+            message : "Booking Updated",
+            result : req.body
+        })
+    }
+).catch(
+    ()=>{
+        res.json({
+            message : "Booking not Updated"
+        })
+    }
+)
 }

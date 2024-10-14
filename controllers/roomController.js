@@ -150,7 +150,7 @@ Room.updateOne({roomId : roomId}, req.body).then(
 ).catch(
     ()=>{
         res.json({
-            message : "Room not Created"
+            message : "Room not Updated"
         })
     }
 )
