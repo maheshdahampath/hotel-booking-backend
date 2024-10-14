@@ -36,5 +36,25 @@ export function deleteRoom(req,res)
         res.status(403).json({
             message : "Sign in Again"
         })
+        return
     }
+
+    const roomId = req.params.roomId
+
+    Room.findOneAndDelete({
+        roomId : roomId
+    }).then(
+        ()=>{
+           res.json({
+            message : "Room Deleted"
+           })
+        }
+    ).catch(
+        ()=>{
+            res.json({
+                message : "Room not Deleted"
+            })
+        }
+    )
 }
+
